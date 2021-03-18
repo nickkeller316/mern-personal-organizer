@@ -9,6 +9,7 @@ import {
 	NavLink,
 	NavbarText,
 } from "reactstrap";
+import About from "./About";
 
 const AppNavBar = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -24,9 +25,7 @@ const AppNavBar = (props) => {
 				<Collapse isOpen={isOpen} navbar>
 					<Nav className="mr-auto" navbar>
 						<NavItem>
-							<NavLink href="https://github.com/nickkeller316/mern-shoppinglist">
-								Tasks
-							</NavLink>
+							<NavLink href="/">Tasks</NavLink>
 						</NavItem>
 						<NavItem>
 							<NavLink href="https://github.com/reactstrap/reactstrap">
@@ -34,7 +33,7 @@ const AppNavBar = (props) => {
 							</NavLink>
 						</NavItem>
 					</Nav>
-					<NavbarText>About</NavbarText>
+					<NavLink href="/about">About</NavLink>
 				</Collapse>
 			</Navbar>
 		</div>
