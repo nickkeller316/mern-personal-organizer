@@ -5,6 +5,9 @@ export default {
 	getTasks: function () {
 		return axios.get("/api/tasks");
 	},
+	getTask: function (id) {
+		return axios.get("/api/tasks/" + id);
+	},
 	//delete
 	deleteTask: function (id) {
 		return axios.delete("/api/tasks/" + id);

@@ -1,7 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../src/index.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import API from "../utils/API";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Tasks from "../components/Tasks";
@@ -12,53 +13,45 @@ const Task = () => {
 	const [tasks, setTasks] = useState([]);
 
 	useEffect(() => {
-		const getTasks = async () => {
-			const tasksFromServer = await fetchTasks();
-			setTasks(tasksFromServer);
-		};
-		getTasks();
+		fetchTasks();
 	}, []);
 
 	//fetch tasks
-	const fetchTasks = async () => {
-		const res = await fetch("http://localhost:3001/api/tasks");
-		const data = await res.json();
-		return data;
-	};
+	function fetchTasks() {
+		API.getTasks()
+			.then((res) => setTasks(res.data))
+			.catch((err) => console.log(err));
+	}
 
-	//fetch one task
-	const fetchTask = async (id) => {
-		const res = await fetch(`http://localhost:3001/api/tasks/${id}`);
-		const data = await res.json();
-		return data;
-	};
-
-	//Add task
-	const addTask = async (task) => {
-		const res = await fetch("http://localhost:3001/api/tasks", {
-			method: "POST",
-			headers: {
-				"Content-type": "application/json",
-			},
-			body: JSON.stringify(task),
-		});
-
-		const data = await res.json();
-		setTasks([...tasks, data]);
-		// const id = Math.floor(Math.random() * 1000) + 1;
-		// const newTask = { id, ...task };
-		// setTasks([...tasks, newTask]);
-	};
-
-	//Delete task
-	const deleteTask = async (id) => {
-		await fetch(`http://localhost:3001/api/tasks/${id}`, {
-			method: "DELETE",
-		});
-
-		setTasks(tasks.filter((task) => task.id !== id));
-	};
-
+	function fetchTask() {
+		API.getTask()
+			.then((res) => setTasks(res.data))
+			.catch((err) => console.log(err));
+	}
+	function deleteTask(id) {
+		API.deleteTask(id)
+			.then((res) => fetchTasks())
+			.catch((err) => console.log(err));
+	}
+	function addTask(event) {
+		event.preventDefault();
+		if (tasks.text && tasks.day) {
+			API.saveTask({
+				text: tasks.text,
+				day: tasks.day,
+				reminder: tasks.reminder,
+			})
+				.then(() =>
+					setTasks({
+						text: "",
+						day: "",
+						reminder: "",
+					})
+				)
+				.then(() => fetchTasks())
+				.catch((err) => console.log(err));
+		}
+	}
 	//toggle reminder
 	const toggleReminder = async (id) => {
 		const taskToToggle = await fetchTask(id);
@@ -110,6 +103,6 @@ const Task = () => {
 			</div>
 		</Router>
 	);
-}
+};
 
 export default Task;
