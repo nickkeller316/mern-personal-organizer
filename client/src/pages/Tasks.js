@@ -64,21 +64,29 @@ const TaskPage = () => {
 	//toggle reminder
 	//toggle reminder
 	const toggleReminder = async (id) => {
-		const taskToToggle = await fetchTask(id);
-		const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
-		const res = await fetch(`http://localhost:3001/api/tasks/${id}`, {
-			method: "PUT",
-			headers: {
-				"Content-type": "application/json",
-			},
-			body: JSON.stringify(updTask),
-		});
-		const data = await res.json();
-		setTasks(
-			tasks.map((task) =>
-				task.id === id ? { ...task, reminder: data.reminder } : task
-			)
-		);
+		API.getTask(id)
+			.then((res) => {
+				let taskToToggle = res.data;
+				console.log("toggle", !taskToToggle.reminder);
+				const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
+				console.log("updating to", updTask);
+				fetch(`http://localhost:3001/api/tasks/${id}`, {
+					method: "PUT",
+					headers: {
+						"Content-type": "application/json",
+					},
+					body: JSON.stringify(updTask),
+				}).then((res) => {
+					const data = res.json();
+					setTasks(
+						tasks.map((task) =>
+							task.id === id ? { ...task, reminder: data.reminder } : task
+						)
+					);
+				});
+			})
+			.then(() => fetchTasks())
+			.catch((err) => console.log(err));
 	};
 	return (
 		<Router>
@@ -106,7 +114,7 @@ const TaskPage = () => {
 						</>
 					)}
 				/>
-				{/* <Route path="/about" component={About} /> */}
+
 				<Footer />
 			</div>
 		</Router>
