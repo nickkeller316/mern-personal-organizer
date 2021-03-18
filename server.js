@@ -18,7 +18,7 @@ app.use(routes);
 
 //connect to the MONGO DB
 mongoose.connect(
-	process.env.MONGO_URI ||
+	process.env.MONGODB_URI ||
 		"mongodb+srv://nicknate316:mern316@cluster0.iy2iv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 );
 
