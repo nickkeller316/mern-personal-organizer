@@ -7,8 +7,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Tasks from "../components/Tasks";
 import AddTask from "../components/AddTask";
+import Task from "../components/Task";
 
-const Task = () => {
+const TaskPage = () => {
 	const [showAddTask, setShowAddTask] = useState(false);
 	const [tasks, setTasks] = useState([]);
 
@@ -23,23 +24,30 @@ const Task = () => {
 			.catch((err) => console.log(err));
 	}
 
+	//fetch task
 	function fetchTask() {
 		API.getTask()
 			.then((res) => setTasks(res.data))
 			.catch((err) => console.log(err));
 	}
+
+	//delete task
 	function deleteTask(id) {
 		API.deleteTask(id)
 			.then((res) => fetchTasks())
 			.catch((err) => console.log(err));
 	}
-	function addTask(event) {
-		event.preventDefault();
-		if (tasks.text && tasks.day) {
+
+	//add task
+	function addTask(text, day, reminder) {
+		console.log(tasks);
+		//event.preventDefault();
+		if (text && day) {
+			console.log("saving");
 			API.saveTask({
-				text: tasks.text,
-				day: tasks.day,
-				reminder: tasks.reminder,
+				text: text,
+				day: day,
+				reminder: reminder,
 			})
 				.then(() =>
 					setTasks({
@@ -52,6 +60,8 @@ const Task = () => {
 				.catch((err) => console.log(err));
 		}
 	}
+
+	//toggle reminder
 	//toggle reminder
 	const toggleReminder = async (id) => {
 		const taskToToggle = await fetchTask(id);
@@ -64,14 +74,12 @@ const Task = () => {
 			body: JSON.stringify(updTask),
 		});
 		const data = await res.json();
-
 		setTasks(
 			tasks.map((task) =>
 				task.id === id ? { ...task, reminder: data.reminder } : task
 			)
 		);
 	};
-
 	return (
 		<Router>
 			<div className="container">
@@ -79,22 +87,22 @@ const Task = () => {
 					onAdd={() => setShowAddTask(!showAddTask)}
 					showAdd={showAddTask}
 				/>
-
 				<Route
 					path="/"
 					exact
 					render={(props) => (
 						<>
 							{showAddTask && <AddTask onAdd={addTask} />}
-							{tasks.length > 0 ? (
-								<Tasks
-									tasks={tasks}
-									onDelete={deleteTask}
-									onToggle={toggleReminder}
-								/>
-							) : (
-								"No Tasks to Show"
-							)}
+							{tasks.length > 0
+								? tasks.map((task, index) => (
+										<Task
+											key={index}
+											task={task}
+											onDelete={() => deleteTask(task._id)}
+											onToggle={toggleReminder}
+										/>
+								  ))
+								: "No Tasks to Show"}
 						</>
 					)}
 				/>
@@ -105,4 +113,4 @@ const Task = () => {
 	);
 };
 
-export default Task;
+export default TaskPage;

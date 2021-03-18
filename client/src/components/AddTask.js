@@ -12,7 +12,7 @@ const AddTask = ({ onAdd }) => {
 			alert("Please add a task");
 			return;
 		}
-		onAdd({ task, day, reminder });
+		onAdd(task, day, reminder);
 		setTask("");
 		setDay("");
 		setReminder(false);
