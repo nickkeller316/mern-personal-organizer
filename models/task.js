@@ -3,18 +3,20 @@ const { boolean } = require("yargs");
 const Schema = mongoose.Schema;
 
 //creating Schema
-const TaskSchema = new Schema({
+const taskSchema = new Schema({
 	text: {
 		type: String,
 		required: true,
 	},
-	date: {
+	day: {
 		type: String,
 		required: true,
 	},
 	reminder: {
 		type: Boolean,
+		required: true,
 	},
 });
 
-module.exports = Task = mongoose.model("task", TaskSchema);
+const Task = mongoose.model("Task", taskSchema);
+module.exports = Task;
