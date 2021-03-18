@@ -7,9 +7,7 @@ import {
 	Nav,
 	NavItem,
 	NavLink,
-	NavbarText,
 } from "reactstrap";
-import About from "./About";
 
 const AppNavBar = (props) => {
 	const [isOpen, setIsOpen] = useState(false);

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import API from "../utils/API";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Tasks from "../components/Tasks";
+//import Tasks from "../components/Tasks";
 import AddTask from "../components/AddTask";
 import Task from "../components/Task";
 import About from "../components/About";
@@ -40,8 +40,8 @@ const TaskPage = () => {
 
 	//add task
 	function addTask(text, day, reminder) {
-
-		//event.preventDefault();
+		console.log(tasks);
+		// event.preventDefault();
 		if (text && day) {
 			console.log("saving");
 			API.saveTask({

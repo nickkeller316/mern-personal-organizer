@@ -1,3 +1,4 @@
+import "../index.css";
 import { useState } from "react";
 
 const AddTask = ({ onAdd }) => {
@@ -6,14 +7,13 @@ const AddTask = ({ onAdd }) => {
 	const [reminder, setReminder] = useState(false);
 
 	const onSubmit = (e) => {
-		console.log(text);
 		e.preventDefault();
 
 		if (!text) {
 			alert("Please add a task");
 			return;
 		}
-		onAdd({ text, day, reminder });
+		onAdd(text, day, reminder);
 		setText("");
 		setDay("");
 		setReminder(false);
