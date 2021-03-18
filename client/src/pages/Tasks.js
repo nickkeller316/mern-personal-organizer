@@ -40,7 +40,7 @@ const TaskPage = () => {
 
 	//add task
 	function addTask(text, day, reminder) {
-		console.log(tasks);
+
 		//event.preventDefault();
 		if (text && day) {
 			console.log("saving");

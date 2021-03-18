@@ -75,15 +75,14 @@ body {
 	margin-bottom: 40px;
 }
 
-.form-control {
+.task-control {
 	margin: 20px 0;
 }
-
-.form-control label {
+.task-control label {
 	display: block;
 }
 
-.form-control input {
+.task-control input {
 	width: 100%;
 	height: 40px;
 	margin: 5px;
@@ -91,17 +90,17 @@ body {
 	font-size: 17px;
 }
 
-.form-control-check {
+.task-control-check {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
-.form-control-check label {
+.task-control-check label {
 	flex: 1;
 }
 
-.form-control-check input {
+.task-control-check input {
 	flex: 2;
 	height: 20px;
 }
