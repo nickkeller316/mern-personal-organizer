@@ -12,7 +12,7 @@ const AddTask = ({ onAdd }) => {
 			alert("Please add a task");
 			return;
 		}
-		onAdd(text, day, reminder);
+		onAdd({ text, day, reminder });
 		setText("");
 		setDay("");
 		setReminder(false);
@@ -20,7 +20,7 @@ const AddTask = ({ onAdd }) => {
 
 	return (
 		<form className="add-form" onSubmit={onSubmit}>
-			<div>
+			<div className="form-control">
 				<label>Task</label>
 				<input
 					type="text"
@@ -29,7 +29,7 @@ const AddTask = ({ onAdd }) => {
 					onChange={(e) => setText(e.target.value)}
 				/>
 			</div>
-			<div>
+			<div className="form-control">
 				<label>Day & Time</label>
 				<input
 					type="text"
@@ -38,7 +38,7 @@ const AddTask = ({ onAdd }) => {
 					onChange={(e) => setDay(e.target.value)}
 				/>
 			</div>
-			<div className="form-control-check">
+			<div className="form-control form-control-check">
 				<label>Set Reminder</label>
 				<input
 					type="checkbox"
