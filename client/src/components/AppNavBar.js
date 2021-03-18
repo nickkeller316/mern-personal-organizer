@@ -28,9 +28,7 @@ const AppNavBar = (props) => {
 							<NavLink href="/">Tasks</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink href="https://github.com/reactstrap/reactstrap">
-								Shopping List
-							</NavLink>
+							<NavLink href="https://www.amazon.com/">Shopping List</NavLink>
 						</NavItem>
 					</Nav>
 					<NavLink href="/about">About</NavLink>
