@@ -4,10 +4,11 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import PageSwitcher from "./pages/PageSwitcher";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<PageSwitcher />
 	</React.StrictMode>,
 	//inserting App into this div
 	//App is root component

@@ -7,9 +7,10 @@ import Footer from "../components/Footer";
 //import Tasks from "../components/Tasks";
 import AddTask from "../components/AddTask";
 import Task from "../components/Task";
+import LogoutHooks from "../components/LogoutHooks";
 import About from "../components/About";
 
-const TaskPage = () => {
+const TaskPage = (props) => {
 	const [showAddTask, setShowAddTask] = useState(false);
 	const [tasks, setTasks] = useState([]);
 
@@ -114,8 +115,9 @@ const TaskPage = () => {
 						</>
 					)}
 				/>
-				<Route path="/about" component={About} />
+				<LogoutHooks updateLogin={props.updateLogin} />
 				<Footer />
+				<About />
 			</div>
 		</Router>
 	);
