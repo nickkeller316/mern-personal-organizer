@@ -1,6 +1,6 @@
 ## Personal organizer
 
-<img src="../personal-organizer.png">
+<img src="./images/screen_shot_2021-03-18_at_6.21.20_pm.png">
 The application offers a simple-easy to use website that will allow users to keep track of tasks and appointments. The data users enter is saved in a database and persists in the database.
 
 # Installation/Usage
